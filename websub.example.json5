@@ -1,0 +1,38 @@
+// Copy to websub.json5 (or set WEBSUB_CONFIG). Feeds can only be changed here; restart after changes.
+{
+    port: 3050,
+    // Public URL of the hub, without trailing slash. hub.secret is only accepted if this is https.
+    baseUrl: "https://hub.example.net",
+    varDir: "./var",
+
+    // All optional; these are the defaults.
+    limits: {
+        maxFeeds: 100,
+        maxSubscriptionsPerFeed: 1000,
+        maxSubscriptionsPerCallbackHost: 10,
+        notifyDelaySeconds: 120,
+        recheckIntervalSeconds: 60,
+        maxRechecks: 100,
+        maxNotificationsPerHour: 30,
+        defaultLeaseSeconds: 864000,    // 10 days
+        minLeaseSeconds: 3600,
+        maxLeaseSeconds: 2419200,       // 28 days
+        maxFeedBytes: 2097152,
+        requestTimeoutSeconds: 10,
+        maxParallelRequests: 10,
+        maxPendingVerifications: 1000,
+        deliveryRetries: 2,             // 0: end subscriptions on the first failed delivery
+        deliveryRetryDelaySeconds: 300,
+    },
+
+    feeds: {
+        // Hub URL: https://hub.example.net/websub/subscribe/tim
+        // Notification: POST https://hub.example.net/websub/notification/<token>
+        tim: {
+            topics: ["https://tim.example.com/feed.xml", "https://tim.example.com/feed.json"],
+            token: "change-me-1234",
+        },
+        // A single topic:
+        // blog: { topic: "https://blog.example.com/rss.xml", token: "another-token" },
+    },
+}
